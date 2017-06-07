@@ -1,0 +1,24 @@
+cmake_minimum_required(VERSION 3.2.2)
+
+include(public/cmake/modules/cmakemacros.cmake)
+include(public/cmake/modules/choose_toolchains_and_function_macro_file.cmake)
+
+project(it)
+
+include(CMakeToolsHelpers OPTIONAL)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_VERBOSE_MAKEFILE OFF)
+set(CMAKE_COLOR_MAKEFILE ON)
+set(ITRAN_BUILD_TYPE Release)
+set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/public/cmake/modules)
+
+
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
+set(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR})
+set(CMAKE_C_CREATE_STATIC_LIBRARY "<CMAKE_AR> rv <TARGET> <LINK_FLAGS> <OBJECTS>")
+
+macro_ensure_out_of_source_build("requires an out of source build. Please create a separate build directory and run 'cmake path' there.")
+
+include(${CUR_CFG_FILE})
+
+
